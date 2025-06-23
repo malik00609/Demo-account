@@ -1,1 +1,139 @@
-# Demo-account
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Color Trading</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    nav {
+      background: black;
+      padding: 10px 0;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+    h1 {
+      margin: 30px 0 10px;
+    }
+    .timer-buttons button {
+      background: dodgerblue;
+      color: white;
+      padding: 12px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .timer-buttons button.active {
+      background: limegreen;
+    }
+    .input-section {
+      margin-top: 20px;
+    }
+    input[type="text"] {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      width: 150px;
+    }
+    .result-button {
+      background: green;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    .result-text {
+      margin-top: 30px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #00ff7f;
+    }
+    .links {
+      margin-top: 40px;
+    }
+    .links a {
+      display: block;
+      background: #00c851;
+      margin: 10px auto;
+      padding: 12px 20px;
+      width: 250px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Color Trading</a>
+    <a href="#">Results</a>
+    <a href="#">Contact</a>
+  </nav>
+
+  <h1>Color Trading</h1>
+
+  <div class="timer-buttons">
+    <button onclick="selectTime(this)">30 Seconds</button>
+    <button onclick="selectTime(this)">1 Minute</button>
+    <button onclick="selectTime(this)">3 Minutes</button>
+    <button onclick="selectTime(this)">5 Minutes</button>
+  </div>
+
+  <div class="input-section">
+    <input type="text" id="codeInput" placeholder="Enter Code" />
+    <button class="result-button" onclick="showResult()">Show Result</button>
+  </div>
+
+  <div class="result-text" id="resultDisplay"></div>
+
+  <div class="links">
+    <a href="https://www.92lotto.club/#/register?invitationCode=62234836484" target="_blank">🎮 Play Jeeto Game</a>
+    <a href="https://whatsapp.com/channel/0029VbB00RE5fM5SO0umup1H" target="_blank">📲 Join WhatsApp Channel</a>
+  </div>
+
+  <script>
+    let currentSelection = null;
+    const fixedPattern = [
+      "BIG", "BIG", "BIG", "SMALL", "BIG", "SMALL", "SMALL",
+      "BIG", "SMALL", "BIG", "SMALL", "BIG", "BIG", "BIG",
+      "BIG", "SMALL", "BIG", "SMALL", "BIG", "SMALL", "BIG",
+      "SMALL", "BIG", "SMALL", "SMALL"
+    ];
+    let patternIndex = 0;
+
+    function selectTime(btn) {
+      document.querySelectorAll('.timer-buttons button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentSelection = btn.textContent;
+    }
+
+    function showResult() {
+      if (!currentSelection) {
+        alert("Please select a time first.");
+        return;
+      }
+
+      const result = fixedPattern[patternIndex];
+      document.getElementById("resultDisplay").textContent = `✅ Result: ${result}`;
+      patternIndex = (patternIndex + 1) % fixedPattern.length;
+    }
+  </script>
+</body>
+</html>
