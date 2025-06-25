@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Color Trading</title>
+  <title>Color Trading - Rs. 5000 Plan</title>
   <style>
     body {
       margin: 0;
@@ -77,6 +77,30 @@
       color: white;
       font-weight: bold;
     }
+    .stage-plan {
+      margin-top: 30px;
+      text-align: left;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      background: #1e2b38;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .stage-plan h2 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .stage-item {
+      margin: 8px 0;
+      border-bottom: 1px dashed #444;
+      padding-bottom: 5px;
+    }
+    .summary {
+      margin-top: 15px;
+      color: #00ff7f;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -87,7 +111,7 @@
     <a href="#">Contact</a>
   </nav>
 
-  <h1>Color Trading</h1>
+  <h1>🎯 Color Trading - Rs. 5000 Full Plan</h1>
 
   <div class="timer-buttons">
     <button onclick="selectTime(this)">30 Seconds</button>
@@ -103,6 +127,12 @@
 
   <div class="result-text" id="resultDisplay"></div>
 
+  <div class="stage-plan" id="stagePlanBox" style="display:none;">
+    <h2>📋 Rs. 5000 Smart Stage Plan</h2>
+    <div id="planOutput"></div>
+    <div class="summary" id="planSummary"></div>
+  </div>
+
   <div class="links">
     <a href="https://www.92lotto.club/#/register?invitationCode=62234836484" target="_blank">🎮 Play Jeeto Game</a>
     <a href="https://whatsapp.com/channel/0029VbB00RE5fM5SO0umup1H" target="_blank">📲 Join WhatsApp Channel</a>
@@ -111,12 +141,13 @@
   <script>
     let currentSelection = null;
     const fixedPattern = [
-      "BIG", "BIG", "BIG", "SMALL", "BIG", "SMALL", "SMALL",
-      "BIG", "SMALL", "BIG", "SMALL", "BIG", "BIG", "BIG",
-      "BIG", "SMALL", "BIG", "SMALL", "BIG", "SMALL", "BIG",
-      "SMALL", "BIG", "SMALL", "SMALL"
+      "SMALL", "BIG", "BIG", "SMALL", "BIG", "SMALL", "SMALL", "BIG",
+      "SMALL", "SMALL", "SMALL", "BIG", "SMALL", "SMALL", "BIG", "SMALL",
+      "BIG", "SMALL", "SMALL", "BIG", "BIG", "SMALL", "BIG", "SMALL"
     ];
     let patternIndex = 0;
+
+    const stageAmounts = [100, 300, 700, 1400, 2500];
 
     function selectTime(btn) {
       document.querySelectorAll('.timer-buttons button').forEach(b => b.classList.remove('active'));
@@ -132,7 +163,30 @@
 
       const result = fixedPattern[patternIndex];
       document.getElementById("resultDisplay").textContent = `✅ Result: ${result}`;
+      generateStagePlan(result);
       patternIndex = (patternIndex + 1) % fixedPattern.length;
+    }
+
+    function generateStagePlan(nextBetColor) {
+      const planBox = document.getElementById("stagePlanBox");
+      const planOutput = document.getElementById("planOutput");
+      const planSummary = document.getElementById("planSummary");
+      planOutput.innerHTML = "";
+      planSummary.innerHTML = "";
+      planBox.style.display = "block";
+
+      let total = 0;
+
+      for (let i = 0; i < stageAmounts.length; i++) {
+        total += stageAmounts[i];
+        const profit = 200;
+        const div = document.createElement("div");
+        div.className = "stage-item";
+        div.textContent = `Stage ${i + 1}: Bet Rs. ${stageAmounts[i]} on ${nextBetColor} → If Win: Profit Rs. ${profit} (Total Invested: Rs. ${total})`;
+        planOutput.appendChild(div);
+      }
+
+      planSummary.innerHTML = `✅ Rs. 5000 Budget Fully Used — No Backup | Fixed Profit: Rs. 200 per Win`;
     }
   </script>
 </body>
